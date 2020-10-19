@@ -1,0 +1,182 @@
+*{padding: 0; border: 0; box-sizing: border-box;}
+*::before, *::after{box-sizing: border-box;}
+
+body{
+    background: #ffe600;
+    min-height: 100vh;/* 在 body 上加背景颜色最好使用 min-height */
+}
+.skin{
+    position: relation; /* 为了给鼻子一个绝对定位 */
+    /* background: #ffe600;
+    height: 100vh; 占满全屏 我们也可以加在 body 上面 */
+}
+.trigon{
+    border: 10px solid black;
+    border-color: black transparent transparent;
+    border-bottom: none;
+    width: 0px;
+    height: 0px;
+    /* 这样画出三角形， */
+    position: absolute;
+    left: 50%;
+    top: 140px; /* 让它在页面上上下左右居中定位 */
+    margin-left: -10px; /* 让图标居中，因为三角形 border 为 14px ，所以给一个 -14px */
+    z-index: 10;
+}
+@keyframes wave{
+    0%{
+        transform: rotate(0deg)
+    }
+    33%{
+        transform: rotate(5deg)
+    }
+    66%{
+        transform: rotate(-5deg)
+    }
+    100%{
+        transform: rotate(0deg)
+    }
+}
+.trigon:hover{
+    transform-origin: 50% 100%; /* 更改一个元素变形的原点。50%是左右方向上中间，100%是上下方向的最下面，所以坐标最后就是鼻子的最下面那个点*/
+    animation: wave 300ms infinite linear;
+}
+.semicircle{
+    position: absolute;
+    width: 20px;
+    height: 6px;
+    /* border: 1px solid green; */
+    top: -16px;
+    left: -10px; /* 想让它往哪边移，就向哪边加负多少像素 */
+    border-radius: 10px 10px 0 0 ; /* 用 border-radius 做半圆 */
+    background-color: black;
+}
+.eye{
+    border: 2px solid black;
+    width: 64px;
+    height: 64px;
+    position: absolute;
+    left: 50%;
+    top: 100px;
+    margin-left: -32px;
+    background: rgb(46, 46, 46);
+    border-radius: 50%; /* border-radius 设置为 50% 来做圆 */
+}
+.eye::before{ /* 眼睛里面的白用伪元素来做 */
+    content: ''; /* 给一个看不见的 content */
+    display: block; /* 默认是内联元素 */
+    border: 3px solid black;
+    width: 32px;
+    height: 32px;
+    background: white;
+    border-radius: 50%;
+    position: relative;
+    left: 8px;
+}
+.eye.left{ /* 这里 .eye 和 .left 之间不能有空格*/
+    transform: translateX(-100px);
+    /* margin-left 已经在父元素上定位了，不能用了 */
+}
+.eye.right{
+    transform: translateX(100px);
+    /* margin-left 已经在父元素上定位了，不能用了 */
+}
+.mouth{
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    left: 50%;
+    top: 164px;
+    margin-left: -100px;
+}
+.mouth .theUpperLip{
+    /* 把上嘴唇看成左右两边，每一边是一个圆角矩形的 1/4 */
+    position: relative;
+    top: -9px;
+    /* border: 1px solid red; */
+}
+.mouth .theUpperLip .left{
+    border: 3px solid black;
+    height: 22px;
+    width: 70px;
+    border-top: none;
+    position: absolute;
+    z-index: 1;
+    background: #ffe600;
+    border-radius: 0 0 0 100px;
+    border-right-color: transparent;
+    transform: rotate(-20deg);
+    left: 50%;
+    margin-left: -68px; /* 把左右两边上嘴唇的位置摆好 */
+}
+.mouth .theUpperLip .right{ /* 中间要加空格 */
+    border: 3px solid black;
+    height: 22px;
+    width: 70px;
+    border-top: none;
+    position: absolute;
+    z-index: 1;
+    background: #ffe600;
+    border-radius: 0 0 100px 0;
+    border-left-color: transparent;
+    transform: rotate(20deg);
+    right: 50%;
+    margin-right: -68px;
+}
+.mouth .theLowerLip{
+    /* border: 1px solid red; */
+    width: 100%;
+    height: 186px;
+    position: absolute;
+    top: 0px;
+    overflow: hidden; /* 让超出下嘴唇的部分不可见 */
+}
+.mouth .theLowerLip .circle1{
+    border: 3px solid black;
+    width: 120px;
+    height: 1000px;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    margin-left: -60px;
+    border-radius: 80px / 300px;
+    background: #9b000a;
+    overflow: hidden;
+}
+.mouth .theLowerLip .circle1 .circle2{
+    width: 110px;
+    height: 180px;
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    margin-left: -55px;
+    border-radius: 50px 50px 0 0 ;
+    background: #ff485f;
+}
+.face{
+    position: absolute;
+    left: 50%;
+    border: 3px solid black;
+    width: 84px;
+    height: 84px;
+    top: 210px;
+    margin-left: -44px;
+    z-index: 3;
+    border-radius: 50%;
+    background: #ff0000;
+}
+.face > img{
+    position: absolute;
+    top: 25%;
+    left: 50%;
+}
+.face.left{
+    transform: translateX(-150px);
+}
+.face.left > img{
+    transform: rotateY(180deg);
+    transform-origin: 0 0;
+}
+.face.right{
+    transform: translateX(150px);
+}
